@@ -8,15 +8,18 @@ if (localStorage.getItem('officeMembersArray')) {
 
 const memberSelectionArea = document.getElementById('checkbox-area');
 for (const member of officeMembers) {
-    const checkbox = document.createElement('input');
     const checkboxLabel = document.createElement('label');
+    const checkbox = document.createElement('input');
     checkbox.type = "checkbox";
+    checkbox.name = "checkbox";
     checkbox.id = member;
     checkbox.value = member;
+    checkbox.innerText = member;
     checkbox.checked = JSON.parse(window.localStorage.getItem(member));
-    checkbox.addEventListener('change', (e) => {
-        window.localStorage.setItem(e.currentTarget.value, e.currentTarget.checked);
-        e.currentTarget.checked = e.currentTarget.checked;
+    checkboxLabel.addEventListener('change', (e) => {
+        console.log(e.target.checked);
+        window.localStorage.setItem(e.target.value, e.target.checked);
+        // e.currentTarget.checked = e.currentTarget.checked;
     })
     checkboxLabel.addEventListener('dblclick', (e) => {
         const isConfirmed = confirm(`Are you sure you want to delete ${e.target.innerText}?`);
@@ -24,9 +27,12 @@ for (const member of officeMembers) {
             removeMember(e);
         }
     })
+    checkboxLabel.setAttribute("for", checkbox.id);
+    // checkboxLabel.innerHTML = `<input type="checkbox" name="checkbox" id=${member}>${member}`;
     checkboxLabel.innerText = member;
-    memberSelectionArea.append(checkbox);
+    checkboxLabel.for = checkbox.id;
     memberSelectionArea.append(checkboxLabel);
+    checkboxLabel.appendChild(checkbox);
 }
 
 function removeMember(e) {
@@ -73,9 +79,9 @@ button.addEventListener("click", function () {
 
 function defineBackgroundColor() {
     let backgroundColor = document.body;
-    let red = Math.floor(Math.random() * 255);
-    let green = Math.floor(Math.random() * 255);
-    let blue = Math.floor(Math.random() * 255);
+    let red = Math.floor(Math.random() * 195) + 60;
+    let green = Math.floor(Math.random() * 195) + 60;
+    let blue = Math.floor(Math.random() * 195) + 60;
     backgroundColor.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`
 }
 
@@ -84,8 +90,8 @@ const selectDeselectAll = document.getElementById('select-deselect');
 let isSelected = false;
 
 selectDeselectAll.addEventListener('click', function () {
-    const allTeam = document.getElementById('checkbox-area');
-    for (const member of allTeam.children) {
+    const allTeam = [...document.getElementsByTagName('input')];
+    for (const member of allTeam) {
         if (isSelected) {
             member.checked = false;
             window.localStorage.setItem(member.value, false);

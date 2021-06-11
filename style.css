@@ -37,8 +37,19 @@ button {
 
 #checkbox-area {
     font-size: 16px;
-    display: grid;
+    /* display: grid; */
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
     grid-template-columns: 5% 20% 5% 20% 5% 20% 5% 20%;
     color: black;
     -webkit-text-stroke: 1px black;
+}
+
+label {
+    display: flex;
+    width: 150px;
+    margin: 5px;
+    justify-content: space-between;
+    align-items: center;
 }
