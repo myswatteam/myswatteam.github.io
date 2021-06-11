@@ -37,7 +37,6 @@ button {
 
 #checkbox-area {
     font-size: 16px;
-    /* display: grid; */
     display: flex;
     flex-direction: column;
     align-content: space-between;

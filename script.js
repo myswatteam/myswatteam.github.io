@@ -17,9 +17,7 @@ for (const member of officeMembers) {
     checkbox.innerText = member;
     checkbox.checked = JSON.parse(window.localStorage.getItem(member));
     checkboxLabel.addEventListener('change', (e) => {
-        console.log(e.target.checked);
         window.localStorage.setItem(e.target.value, e.target.checked);
-        // e.currentTarget.checked = e.currentTarget.checked;
     })
     checkboxLabel.addEventListener('dblclick', (e) => {
         const isConfirmed = confirm(`Are you sure you want to delete ${e.target.innerText}?`);
@@ -28,7 +26,6 @@ for (const member of officeMembers) {
         }
     })
     checkboxLabel.setAttribute("for", checkbox.id);
-    // checkboxLabel.innerHTML = `<input type="checkbox" name="checkbox" id=${member}>${member}`;
     checkboxLabel.innerText = member;
     checkboxLabel.for = checkbox.id;
     memberSelectionArea.append(checkboxLabel);
